@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostesTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePostesTable extends Migration
      */
     public function up()
     {
-        Schema::create('postes', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
@@ -22,9 +22,9 @@ class CreatePostesTable extends Migration
             $table->boolean('is_published')->default(1);
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->index('category_id','poste_category_idx');
-            $table->foreign('category_id', 'poste_category_fk')->on('categories')->references('id');
+
+            $table->unsignedBigInteger('category_id');
+
         });
     }
 
@@ -35,6 +35,6 @@ class CreatePostesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postes');
+        Schema::dropIfExists('posts');
     }
 }
