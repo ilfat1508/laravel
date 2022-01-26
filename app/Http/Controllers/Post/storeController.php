@@ -8,24 +8,15 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 
-class storeController extends Controller
+class storeController extends BaseController
 {
     public function __invoke(StoreRequest $request)
     {
 
         $data = $request->validated();
-        $tags = $data['tags'];
-        unset($data['tags']);
 
-        $post = Post::create($data);
-//        foreach ($tags as $tag) {
-//PostTag::firstOrCreate([
-//    'tag_id'=>$tag,
-//    'post_id'=>$post->id,
-//]);
-//        }
+      $this->service->store($data);
 
-        $post->tags()->attach($tags);
         return redirect()->route('post.index');
 
     }
