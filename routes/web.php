@@ -29,7 +29,7 @@ Route::get('/my_girl', function (){
 });
 Route::get('/my_dog', function(){
     return "akbay";
-    echo 'pirat';
+
 });
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -37,14 +37,25 @@ Route::get('/my_second_controller', 'MySecondController@first_func');
 Route::get('/my_second_controller', 'MySecondController@second_func');
 Route::get('/my_third_controller', 'MyThirdController@third_func');
 ////////////////////////////////////////////////////
-Route::get('/posts', 'PostController@index')->name('post.index');
+
 Route::get('/cars', 'MySecondController@second_func');
 Route::get('/users', 'MyThirdController@third_func');
 Route::get('/comps','MyFoursController@fours_func');
 
 /////////////////////////////////////////////////urok9
-Route::get('/posts/create', 'PostController@create')->name('post.create');
+Route::group(['namespace'=>'Post'], function (){
 
+    Route::get('/posts', 'indexController')->name('post.index');
+    Route::get('/posts/create', 'createController')->name('post.create');
+    Route::post('/posts', 'storeController')->name('post.store');
+    Route::get('/posts/{post}', 'showController')->name('post.show');
+    Route::get('/posts/{post}/edit', 'editController')->name('post.edit');
+    Route::patch('/posts/{post}', 'updateController')->name('post.update');
+    Route::delete('/posts/{post}', 'destroyController')->name('post.delete');
+});
+
+Route::get('/posts', 'PostController@index')->name('post.index');
+Route::get('/posts/create', 'PostController@create')->name('post.create');
 Route::post('/posts', 'PostController@store')->name('post.store');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('post.edit');
@@ -56,6 +67,9 @@ Route::get('/posts/update', 'PostController@update');
 Route::get('/posts/delete', 'PostController@delete');
 Route::get('/posts/first_or_create', 'PostController@firstOrCreate');
 Route::get('/posts/update_or_create', 'PostController@updateOrCreate');
+
+
+
 Route::get('/mice/create', 'MouseController@create');
 Route::get('/mice/update', 'MouseController@update');
 Route::get('/mice/delete', 'MouseController@delete');
