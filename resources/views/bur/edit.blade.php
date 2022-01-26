@@ -23,6 +23,19 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label for="invs">Invs</label>
+            <select multiple class="form-control" id="invs" name="inv_id[]">
+                @foreach($invs as $inv)
+                    <option
+                        @foreach($bur->invs as $burnInv)
+                        {{$inv->id === $burnInv->id ? ' selected' : ''}}
+                        @endforeach
+                        value="{{$inv->id   }}">{{$inv->title}}</option>
+                @endforeach
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 @endsection

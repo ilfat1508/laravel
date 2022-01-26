@@ -46,9 +46,14 @@ class BurController extends Controller
             'position'=>'string',
             'responsibilities'=>'string',
             'category_id'=>'',
+            'inv_id'=>'',
         ]);
 
+        $invs = $data['inv_id'];
+        unset($data['inv_id']);
+
         $bur->update($data);
+        $bur->invs()->sync($invs);
         return redirect()->route('bur.show', $bur->id);
     }
     public function destroy(Bur $bur){
