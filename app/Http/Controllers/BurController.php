@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class BurController extends Controller
 {
     public function index(){
-        $burs=Bur::all();
+        $burs=Bur::paginate(10);
+
         return view('bur.index', compact('burs'));
     }
     public function create(){

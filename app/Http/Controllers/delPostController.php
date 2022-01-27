@@ -8,7 +8,7 @@ use App\Models\PostTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class delPostController extends Controller
 {
     public function index()
     {
